@@ -1,0 +1,64 @@
+[user]
+	name = JMB
+	email = jbruel@gmail.com
+[alias]
+	co = checkout
+	st = status
+	commit = commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ll = log --oneline --graph --decorate --all
+	repo = config --get remote.origin.url
+	# Git Commit, Add all and Push — in one step.
+	cap = "!f() { git add .; git commit -m \"$@\"; git push; }; f"
+
+	# NEW.
+	new = "!f() { git cap \"📦 NEW: $@\"; }; f"
+	# IMPROVE.
+	imp = "!f() { git cap \"👌 IMPROVE: $@\"; }; f"
+	# FIX.
+	fix = "!f() { git cap \"🐛 FIX: $@\"; }; f"
+	# RELEASE.
+	rlz = "!f() { git cap \"🚀 RELEASE: $@\"; }; f"
+	# DOC.
+	doc = "!f() { git cap \"📖 DOC: $@\"; }; f"
+	# TEST.
+	tst = "!f() { git cap \"✅ TEST: $@\"; }; f"
+[apply]
+	whitespace = nowarn
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[pull]
+	rebase = merges
+[url "https://github.com/jmbruel"]
+        insteadOf = jmb:
+[core]
+	excludesfile = /Users/jmb/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Users/jmb/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filesystem "Oracle Corporation|1.8.0_152|/dev/disk1s5"]
+	timestampResolution = 1001 milliseconds
+	minRacyThreshold = 0 nanoseconds
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
